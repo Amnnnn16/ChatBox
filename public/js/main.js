@@ -1,9 +1,12 @@
 const socket=io();
+const chatMessages=document.querySelector('.chat-messages');
 
 
 socket.on('message',message=>{
     console.log(message);
     outputMessage(message);
+    //scroll
+chatMessages.scrollTop=chatMessages.scrollHeight;
 
 });  
 
@@ -15,6 +18,8 @@ chatForm.addEventListener('submit',(e)=>{
     const msg=e.target.elements.msg.value;
  
     socket.emit('chatMsg',msg);
+    e.target.elements.msg.value='';
+    e.target.elements.msg.focus();
 })
 
 //displaying message on the front end;
@@ -26,6 +31,8 @@ function outputMessage(message){
     <p class="text">
        ${message}
     </p>`;
-document.querySelector('.chat-messages').appendChild(div);
+chatMessages.appendChild(div);
 
 }
+
+
