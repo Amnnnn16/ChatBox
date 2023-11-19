@@ -11,7 +11,7 @@ app.use(express.static("public"));
 
 io.on("connection", (socket)=>{
     console.log("New websocket connection");
-    
+
     socket.emit('message','welcome to chatboxxx');
 
     //when a user enters a room
@@ -22,7 +22,10 @@ io.on("connection", (socket)=>{
         io.emit('message','A user has left the chat');
     })
 
-     
+    socket.on('chatMsg',(msg)=>{
+        // console.log(msg);
+        io.emit('message',msg);
+    }) 
 })
 
 
