@@ -21,7 +21,7 @@ io.on("connection", (socket) =>
     const user=userJoin(socket.id,username,room);
     socket.join(user.room);
 
-    socket.emit("message", formatMessage(bot, "welcome to chatboxxx"));
+    socket.emit("message", formatMessage(bot, `Welcome ${username} to ${room}`));
 
     //when a user enters a room
     socket.broadcast.to(user.room).emit(
